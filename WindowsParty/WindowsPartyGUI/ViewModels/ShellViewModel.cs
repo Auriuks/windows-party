@@ -6,12 +6,18 @@ namespace WindowsPartyGUI.ViewModels
     {
         public ShellViewModel()
         {
-            LoadLogin();
+            // LoadLogin();
+            LoadMain();
         }
 
         public void LoadLogin()
         {
             ActivateItem(new LoginViewModel ());
+        }
+
+        public void LoadMain()
+        {
+            ActivateItem(new MainViewModel());
         }
     }
 }

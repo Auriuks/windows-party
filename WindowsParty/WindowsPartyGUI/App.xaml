@@ -9,6 +9,7 @@
                         <local:Bootstrapper x:Key="Bootstrapper"/>
                     </ResourceDictionary>
              </ResourceDictionary.MergedDictionaries>
-         </ResourceDictionary>
+             <FontFamily x:Key="Roboto">pack://application:,,,/Fonts/#Roboto</FontFamily>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
