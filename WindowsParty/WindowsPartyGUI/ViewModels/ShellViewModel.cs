@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Caliburn.Micro;
 
 namespace WindowsPartyGUI.ViewModels
 {
-    class ShellViewModel
+    public class ShellViewModel: Conductor<object>
     {
+        public ShellViewModel()
+        {
+            LoadLogin();
+        }
+
+        public void LoadLogin()
+        {
+            ActivateItem(new LoginViewModel ());
+        }
     }
 }
