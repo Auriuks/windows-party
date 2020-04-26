@@ -45,12 +45,13 @@
         <Border  Grid.Row="3" Grid.Column="1" Margin="3" Padding="2" BorderThickness="0" CornerRadius="5" Background="White">
             <DockPanel Margin="5" >
                 <Image DockPanel.Dock="Left" Source="../Assets/password.png" Width="20" Height="20" Margin="5"></Image>
-                <TextBox FontSize="12" 
-                         HorizontalAlignment="Stretch" 
-                         VerticalContentAlignment="Center" 
-                         Background="Transparent"
-                         Foreground="#999"
-                         BorderThickness="0" ></TextBox>
+                <PasswordBox FontSize="12" 
+                             HorizontalAlignment="Stretch" 
+                             VerticalContentAlignment="Center" 
+                             Background="Transparent"
+                             Foreground="#999"
+                             BorderThickness="0" 
+                ></PasswordBox>
             </DockPanel>
         </Border>
 
