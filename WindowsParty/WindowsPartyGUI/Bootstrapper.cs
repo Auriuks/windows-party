@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
+using WindowsPartyBase.Interfaces;
+using WindowsPartyBase.Services;
 using WindowsPartyGUI.ViewModels;
+using AutoMapper;
 using Caliburn.Micro;
+using log4net;
 
 namespace WindowsPartyGUI
 {
@@ -17,11 +22,32 @@ namespace WindowsPartyGUI
 
         protected override void Configure()
         {
+            var config = new MapperConfiguration(cfg => {
+                cfg.AddMaps(new[] {
+                    "WindowsParty",
+                    "WindowsPartyBase"
+                });
+            });
+
+            log4net.Config.XmlConfigurator.Configure();
+
             _container.Instance(_container);
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+
+                //WindowsPartyBase initialization
+                .PerRequest<IRestClientBase, RestClientBase>()
+                .Singleton<IUserService, UserService>()
+                .Singleton<IServerInformationService, ServerInformationService>()
+                .PerRequest<IAuthenticationService, AuthenticationService>();
+
+            _container.RegisterInstance(
+                typeof(IMapper),
+                "automapper",
+                config.CreateMapper()
+            );
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)

@@ -4,20 +4,14 @@ namespace WindowsPartyGUI.ViewModels
 {
     public class ShellViewModel: Conductor<object>
     {
-        public ShellViewModel()
+        public ShellViewModel(MainViewModel main)
         {
-            // LoadLogin();
-            LoadMain();
+            LoadLogin(main);
         }
 
-        public void LoadLogin()
+        public void LoadLogin(MainViewModel main)
         {
-            ActivateItem(new LoginViewModel ());
-        }
-
-        public void LoadMain()
-        {
-            ActivateItem(new MainViewModel());
+            ActivateItem(main);
         }
     }
 }
