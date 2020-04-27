@@ -99,9 +99,19 @@
 
             <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="Servers"
                       HorizontalContentAlignment="Stretch" BorderThickness="0">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Setter Property="BorderThickness" Value="0" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderThickness="0,0,0,0.5" BorderBrush="#999">
                             <Grid HorizontalAlignment="Stretch" Margin="10">
                                 <TextBlock Text="{Binding Name}" FontFamily="{StaticResource Roboto}" Foreground="#999"
                                            HorizontalAlignment="Left" VerticalAlignment="Center" 
@@ -110,7 +120,6 @@
                                            HorizontalAlignment="Right" VerticalAlignment="Center" 
                                            Height="25" />
                             </Grid>
-                        </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
