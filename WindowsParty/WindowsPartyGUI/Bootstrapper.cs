@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
 using WindowsPartyBase.Interfaces;
 using WindowsPartyBase.Services;
+using WindowsPartyGUI.Helpers;
 using WindowsPartyGUI.ViewModels;
 using AutoMapper;
 using Caliburn.Micro;
@@ -18,6 +20,10 @@ namespace WindowsPartyGUI
         public Bootstrapper()
         {
             Initialize();
+            ConventionManager.AddElementConvention<PasswordBox>(
+                PasswordBoxHelper.BoundPasswordProperty,
+                "Password",
+                "PasswordChanged");
         }
 
         protected override void Configure()

@@ -21,13 +21,13 @@ namespace WindowsPartyBase.Services
             BaseInitialize(StaticConfigurations.ServerUrl);
         }
      
-        public async Task<T> GetAsync<T>(string uri, bool noLogging = false) where T : new()
+        public async Task<T> GetAsync<T>(string uri, bool noLogging = false) where T : class, new()
         {
             var request = new RestRequest(uri, Method.GET);
             return await ExecuteAsync<T>(request, noLogging);
         }
 
-        public async Task<T> PostAsync<T>(string uri, object value, bool noLogging = false) where T : new()
+        public async Task<T> PostAsync<T>(string uri, object value, bool noLogging = false) where T : class, new()
         {
             var request = new RestRequest(uri, Method.POST);
             request.AddJsonBody(value);
@@ -44,7 +44,7 @@ namespace WindowsPartyBase.Services
             RestClient.UseSerializer(() => new CustomSerializer());
         }
 
-        private T GetResponse<T>(IRestRequest request, IRestResponse<T> response, bool noLogging = false) where T : new()
+        private T GetResponse<T>(IRestRequest request, IRestResponse<T> response, bool noLogging = false) where T : class
         {
             _log.Info($@"Request {request.Resource}");
             if (!noLogging)
@@ -53,7 +53,7 @@ namespace WindowsPartyBase.Services
             if (!response.IsSuccessful)
             {
                 _log.Error($@"Status {response.StatusCode} : {response.StatusDescription} - {response.Content}");
-                throw new ServerException($@"{response.StatusCode}");
+                return null;
             }
 
             var responseData = response.Data;
@@ -64,7 +64,7 @@ namespace WindowsPartyBase.Services
             return responseData;
         }
 
-        public async Task<T> ExecuteAsync<T>(RestRequest request, bool noLogging = false) where T : new()
+        public async Task<T> ExecuteAsync<T>(RestRequest request, bool noLogging = false) where T : class, new()
         {
             request.AddHeader("Accept", "application/json");
             request.AddHeader("Content-type", "application/json");

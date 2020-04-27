@@ -74,7 +74,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Mappers\ServerMapper.cs" />
+    <Compile Include="Models\ChangePageMessage.cs" />
     <Compile Include="Models\ServerModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

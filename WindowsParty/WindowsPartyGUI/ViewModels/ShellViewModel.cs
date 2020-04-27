@@ -1,17 +1,20 @@
-﻿using Caliburn.Micro;
+﻿using WindowsPartyGUI.Models;
+using Caliburn.Micro;
 
 namespace WindowsPartyGUI.ViewModels
 {
-    public class ShellViewModel: Conductor<object>
+    public class ShellViewModel: Conductor<object>, IHandle<ChangePageMessage>
     {
-        public ShellViewModel(MainViewModel main)
+        public ShellViewModel(IEventAggregator eventAggregator)
         {
-            LoadLogin(main);
+            eventAggregator.Subscribe(this);
+            Handle(new ChangePageMessage(typeof(LoginViewModel)));
         }
 
-        public void LoadLogin(MainViewModel main)
+        public void Handle(ChangePageMessage message)
         {
-            ActivateItem(main);
+            var instance = IoC.GetInstance(message.ViewModelType, message.ViewModelType.ToString());
+            ActivateItem(instance);
         }
     }
 }

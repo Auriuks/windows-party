@@ -32,12 +32,14 @@
         <Border  Grid.Row="2" Grid.Column="1" Margin="3" Padding="2" BorderThickness="0" CornerRadius="5" Background="White">
             <DockPanel Margin="5" >
                 <Image DockPanel.Dock="Left" Source="../Assets/username.png" Width="20" Height="20" Margin="5"></Image>
-                <TextBox FontSize="12" 
-                         HorizontalAlignment="Stretch" 
-                         VerticalContentAlignment="Center" 
-                         Background="Transparent"
-                         Foreground="#999"
-                         BorderThickness="0" ></TextBox>
+                <TextBox 
+                    x:Name="UserName"
+                    FontSize="12" 
+                    HorizontalAlignment="Stretch" 
+                    VerticalContentAlignment="Center" 
+                    Background="Transparent"
+                    Foreground="#999"
+                    BorderThickness="0" ></TextBox>
             </DockPanel>
         </Border>
 
@@ -45,7 +47,7 @@
         <Border  Grid.Row="3" Grid.Column="1" Margin="3" Padding="2" BorderThickness="0" CornerRadius="5" Background="White">
             <DockPanel Margin="5" >
                 <Image DockPanel.Dock="Left" Source="../Assets/password.png" Width="20" Height="20" Margin="5"></Image>
-                <PasswordBox FontSize="12" 
+                <PasswordBox x:Name="Password" FontSize="12" 
                              HorizontalAlignment="Stretch" 
                              VerticalContentAlignment="Center" 
                              Background="Transparent"
@@ -56,7 +58,7 @@
         </Border>
 
         <!-- Row 4 -->
-            <Button Grid.Row="4" Grid.Column="1" Margin="3" BorderBrush="{x:Null}" Foreground="{x:Null}">
+        <Button Grid.Row="4" Grid.Column="1" x:Name="LogIn" Margin="3" BorderBrush="{x:Null}" Foreground="{x:Null}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

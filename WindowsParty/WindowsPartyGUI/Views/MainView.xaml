@@ -23,6 +23,7 @@
                Margin="20,5,5,5" Height="50" Width="100" />
 
         <Button Grid.Row="0" Grid.Column="1"
+                x:Name="Logout"
                 HorizontalAlignment="Right"
                 Margin="5,5,5,5" Height="30" Width="100" Padding="0">
             <Button.Resources>

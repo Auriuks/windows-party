@@ -24,6 +24,8 @@ namespace WindowsPartyBase.Services
             try
             {
                 var response = await _restClientBase.PostAsync<LoginResponse>("v1/tokens", new {UserName = userName, Password = password}, true);
+                if(response == null)
+                    return;
                 userData = _mapper.Map<UserData>(response);
                 userData.UserName = userName;
             }

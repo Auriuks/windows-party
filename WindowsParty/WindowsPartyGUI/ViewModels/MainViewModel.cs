@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using WindowsPartyBase.Interfaces;
 using WindowsPartyGUI.Models;
@@ -11,33 +12,37 @@ namespace WindowsPartyGUI.ViewModels
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly IServerInformationService _serverInformationService;
+        private readonly IEventAggregator _eventAggregator;
         private readonly IMapper _mapper;
 
-        public MainViewModel(IAuthenticationService authenticationService, 
-            IServerInformationService serverInformationService, 
+        public MainViewModel(IAuthenticationService authenticationService,
+            IServerInformationService serverInformationService,
+            IEventAggregator eventAggregator,
             IMapper mapper)
         {
             _authenticationService = authenticationService;
             _serverInformationService = serverInformationService;
             _mapper = mapper;
-            LoadServers();
+            _eventAggregator = eventAggregator;
+             LoadServers();
         }
         public ObservableCollection<ServerModel> Servers { get; set; }
 
 
         public void LoadServers()
         {
-            Task.Run(async () =>
+            new Thread(async () =>
             {
                 var servers = await _serverInformationService.GetServers();
                 Servers = _mapper.Map<ObservableCollection<ServerModel>>(servers);
                 NotifyOfPropertyChange(()=>Servers);
-            });
+            }).Start();
         }
 
         public void Logout()
         {
             _authenticationService.Logout();
+            _eventAggregator.PublishOnUIThread(new ChangePageMessage(typeof(LoginViewModel)));
         }
     }
 }
