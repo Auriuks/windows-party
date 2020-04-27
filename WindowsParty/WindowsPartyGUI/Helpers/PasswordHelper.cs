@@ -15,13 +15,9 @@ namespace WindowsPartyGUI.Helpers
         public static string GetBoundPassword(DependencyObject d)
         {
             var box = d as PasswordBox;
-            if (box != null)
-            {
-                // this funny little dance here ensures that we've hooked the
-                // PasswordChanged event once, and only once.
-                box.PasswordChanged -= PasswordChanged;
-                box.PasswordChanged += PasswordChanged;
-            }
+            if (box == null) return (string) d.GetValue(BoundPasswordProperty);
+            box.PasswordChanged -= PasswordChanged;
+            box.PasswordChanged += PasswordChanged;
 
             return (string)d.GetValue(BoundPasswordProperty);
         }
@@ -29,7 +25,7 @@ namespace WindowsPartyGUI.Helpers
         public static void SetBoundPassword(DependencyObject d, string value)
         {
             if (string.Equals(value, GetBoundPassword(d)))
-                return; // and this is how we prevent infinite recursion
+                return;
 
             d.SetValue(BoundPasswordProperty, value);
         }
@@ -48,12 +44,10 @@ namespace WindowsPartyGUI.Helpers
 
         private static void PasswordChanged(object sender, RoutedEventArgs e)
         {
-            PasswordBox password = sender as PasswordBox;
-
+            if (!(sender is PasswordBox password)) return;
             SetBoundPassword(password, password.Password);
-
-            // set cursor past the last character in the password box
-            password.GetType().GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(password, new object[] { password.Password.Length, 0 });
+            password.GetType().GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic)
+                ?.Invoke(password, new object[] {password.Password.Length, 0});
         }
 
     }
