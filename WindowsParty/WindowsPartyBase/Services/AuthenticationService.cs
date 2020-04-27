@@ -30,7 +30,7 @@ namespace WindowsPartyBase.Services
                 if(response.StatusCode == HttpStatusCode.Unauthorized)
                     return LoginResponses.BadCredentials;
 
-                if (!response.IsSuccessful || response.Data == null)
+                if (response.StatusCode != HttpStatusCode.OK || response.Data == null)
                     return LoginResponses.FailedToLogin;
 
                 userData = _mapper.Map<UserData>(response.Data);

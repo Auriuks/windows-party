@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using WindowsPartyBase.Interfaces;
 using WindowsPartyBase.Models;
@@ -20,7 +20,7 @@ namespace WindowsPartyBase.Services
         public async Task<List<ServerData>> GetServers()
         {
             var serverResponse = await _restClientBase.GetAsync<List<ServerResponse>>("v1/servers");
-            if(!serverResponse.IsSuccessful || serverResponse.Data == null)
+            if(serverResponse.StatusCode !=HttpStatusCode.OK  || serverResponse.Data == null)
                 return new List<ServerData>();
 
             var servers = _mapper.Map<List<ServerData>>(serverResponse.Data);

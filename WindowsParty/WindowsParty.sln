@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPartyGUI", "WindowsP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPartyBase", "WindowsPartyBase\WindowsPartyBase.csproj", "{60589BFB-8367-48DD-8CC5-D6D217DF9B81}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPartyBaseTests", "WindowsPartyBaseTests\WindowsPartyBaseTests.csproj", "{6F8201FE-14B4-4314-8C6E-C4B0008C4114}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPartyGuiTest", "WindowsPartyGuiTest\WindowsPartyGuiTest.csproj", "{AF668EC7-51D9-46EF-93D4-2B62CD594F30}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{5A23B5FA-5FE6-422F-8191-7CDE1C06D2E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +27,21 @@ Global
 		{60589BFB-8367-48DD-8CC5-D6D217DF9B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60589BFB-8367-48DD-8CC5-D6D217DF9B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60589BFB-8367-48DD-8CC5-D6D217DF9B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F8201FE-14B4-4314-8C6E-C4B0008C4114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F8201FE-14B4-4314-8C6E-C4B0008C4114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F8201FE-14B4-4314-8C6E-C4B0008C4114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F8201FE-14B4-4314-8C6E-C4B0008C4114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF668EC7-51D9-46EF-93D4-2B62CD594F30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF668EC7-51D9-46EF-93D4-2B62CD594F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF668EC7-51D9-46EF-93D4-2B62CD594F30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF668EC7-51D9-46EF-93D4-2B62CD594F30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6F8201FE-14B4-4314-8C6E-C4B0008C4114} = {5A23B5FA-5FE6-422F-8191-7CDE1C06D2E1}
+		{AF668EC7-51D9-46EF-93D4-2B62CD594F30} = {5A23B5FA-5FE6-422F-8191-7CDE1C06D2E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7A6B5C5A-E85D-48BD-9D6A-D6EF0B9E4ED9}
