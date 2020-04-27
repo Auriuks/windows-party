@@ -94,7 +94,7 @@
                    Foreground="#DC4C4C"
                    VerticalContentAlignment="Center" 
                    HorizontalAlignment="Center"
-            >Login failed. Try again</Label>
+                   Name="ErrorLabel"/>
         </Grid>
        
     </Grid>

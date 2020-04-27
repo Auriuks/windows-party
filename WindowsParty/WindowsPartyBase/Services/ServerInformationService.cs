@@ -20,9 +20,10 @@ namespace WindowsPartyBase.Services
         public async Task<List<ServerData>> GetServers()
         {
             var serverResponse = await _restClientBase.GetAsync<List<ServerResponse>>("v1/servers");
-            if(serverResponse == null)
+            if(!serverResponse.IsSuccessful || serverResponse.Data == null)
                 return new List<ServerData>();
-            var servers = _mapper.Map<List<ServerData>>(serverResponse);
+
+            var servers = _mapper.Map<List<ServerData>>(serverResponse.Data);
             return servers;
         }
     }

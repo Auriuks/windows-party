@@ -1,6 +1,5 @@
-﻿using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
+using WindowsPartyBase.Helpers;
 using WindowsPartyBase.Interfaces;
 using WindowsPartyGUI.Models;
 using Caliburn.Micro;
@@ -15,6 +14,7 @@ namespace WindowsPartyGUI.ViewModels
         private readonly IUserService _userService;
         private readonly IEventAggregator _eventAggregator;
         private bool _errorLabelIsVisible;
+        private string _errorLabel;
 
         public string UserName
         {
@@ -37,6 +37,17 @@ namespace WindowsPartyGUI.ViewModels
                 _password = value;
                 NotifyOfPropertyChange(() => Password);
                 NotifyOfPropertyChange(() => CanLogIn);
+            }
+        }
+
+        public string ErrorLabel
+        {
+            get => _errorLabel;
+            set
+            {
+                if (value == _errorLabel) return;
+                _errorLabel = value;
+                NotifyOfPropertyChange(() => ErrorLabel);
             }
         }
 
@@ -64,11 +75,11 @@ namespace WindowsPartyGUI.ViewModels
         {
             new Thread(async () =>
             {
-                await _authenticationService.Login(UserName, Password);
-                if (_userService.IsLoggedIn())
+                var loginResponse = await _authenticationService.Login(UserName, Password);
+                if (_userService.IsLoggedIn() && loginResponse == LoginResponses.Success)
                     OnSuccessfulLogin();
                 else
-                    OnFailedLogin();
+                    OnFailedLogin(loginResponse);
             }).Start();
 
         }
@@ -78,8 +89,9 @@ namespace WindowsPartyGUI.ViewModels
             _eventAggregator.PublishOnUIThread(new ChangePageMessage(typeof(MainViewModel)));
         }
 
-        public void OnFailedLogin()
+        public void OnFailedLogin(LoginResponses loginResponse)
         {
+            ErrorLabel = loginResponse == LoginResponses.BadCredentials ? "Wrong user name or password" : "Failed to login";
             ErrorLabelIsVisible = true;
         }
 

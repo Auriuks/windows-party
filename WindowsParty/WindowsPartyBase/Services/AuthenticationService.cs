@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
+using WindowsPartyBase.Helpers;
 using WindowsPartyBase.Interfaces;
 using WindowsPartyBase.Models;
 using AutoMapper;
@@ -18,26 +20,29 @@ namespace WindowsPartyBase.Services
             _mapper = mapper;
         }
 
-        public async Task Login(string userName, string password)
+        public async Task<LoginResponses> Login(string userName, string password)
         {
-            UserData userData = null;
+            UserData userData;
             try
             {
                 var response = await _restClientBase.PostAsync<LoginResponse>("v1/tokens", new {UserName = userName, Password = password}, true);
-                if(response == null)
-                    return;
-                userData = _mapper.Map<UserData>(response);
+                
+                if(response.StatusCode == HttpStatusCode.Unauthorized)
+                    return LoginResponses.BadCredentials;
+
+                if (!response.IsSuccessful || response.Data == null)
+                    return LoginResponses.FailedToLogin;
+
+                userData = _mapper.Map<UserData>(response.Data);
                 userData.UserName = userName;
             }
             catch (Exception)
             {
                 userData = null;
             }
-            finally
-            {
-                _userService.SetUserData(userData);
-            }
-           
+
+            _userService.SetUserData(userData);
+            return LoginResponses.Success;
         }
 
         public void Logout()

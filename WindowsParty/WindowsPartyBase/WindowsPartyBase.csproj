@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\StaticConfigurations.cs" />
+    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Interfaces\IRestClientBase.cs" />
     <Compile Include="Configuration\LowercaseContractResolver.cs" />
     <Compile Include="Mappings\LoginProfile.cs" />
