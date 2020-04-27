@@ -14,6 +14,7 @@ namespace WindowsPartyGUI.ViewModels
         private readonly IAuthenticationService _authenticationService;
         private readonly IUserService _userService;
         private readonly IEventAggregator _eventAggregator;
+        private bool _errorLabelIsVisible;
 
         public string UserName
         {
@@ -36,6 +37,17 @@ namespace WindowsPartyGUI.ViewModels
                 _password = value;
                 NotifyOfPropertyChange(() => Password);
                 NotifyOfPropertyChange(() => CanLogIn);
+            }
+        }
+
+        public bool ErrorLabelIsVisible
+        {
+            get => _errorLabelIsVisible;
+            set
+            {
+                if (value == _errorLabelIsVisible) return;
+                _errorLabelIsVisible = value;
+                NotifyOfPropertyChange(() => ErrorLabelIsVisible);
             }
         }
 
@@ -68,7 +80,7 @@ namespace WindowsPartyGUI.ViewModels
 
         public void OnFailedLogin()
         {
-          
+            ErrorLabelIsVisible = true;
         }
 
     }

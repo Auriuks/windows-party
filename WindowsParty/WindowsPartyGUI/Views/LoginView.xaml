@@ -21,6 +21,7 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -85,5 +86,16 @@
             </Button.Style>
          <TextBlock Text="Log in" Foreground="White"></TextBlock>
         </Button>
+
+        <!-- Row 5 -->
+        <Grid Name="ErrorLabelIsVisible" Grid.Row="5" Grid.Column="1">
+            <Label  
+                   Background="Transparent" 
+                   Foreground="#DC4C4C"
+                   VerticalContentAlignment="Center" 
+                   HorizontalAlignment="Center"
+            >Login failed. Try again</Label>
+        </Grid>
+       
     </Grid>
 </UserControl>
